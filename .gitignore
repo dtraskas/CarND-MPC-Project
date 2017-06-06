@@ -3,3 +3,9 @@ build
 tags
 .editorconfig
 .DS_Store
+term2_sim.app
+CMakeFiles
+mpc
+CMakeCache.txt
+Makefile
+cmake_install.cmake

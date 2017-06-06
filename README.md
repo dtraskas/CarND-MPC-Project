@@ -1,7 +1,27 @@
 # CarND-Controls-MPC
 Self-Driving Car Engineer Nanodegree Program
 
+[video1]: ./car_simulation.mov
 ---
+
+## Model and MPC Solver Parameters 
+
+The Kinematic model used in this simulation does not take into account tire forces or gravity. The vehicle's state vector is defined by the position [x,y], the orientation [_ψ_] and the velocity [v] of the vehicle. Steering angle and throttle are enabled by the actuators available to our simulated vehicle where throttle is in the range of [-1, 1] and steering angle [-25, 25]. Our model can predict the state on the next time step using the current state and actuators and the following formulas:
+
+x_t+1 = x_t + v_t * cos(_ψ_t) * dt
+y_t+1 = y_t + v_t * sin(_ψ_t) * dt
+_ψ_t+1 = _ψ_t + v_t/Lf * d * dt
+v_t+1 = v_t + a_t * dt
+
+Lf is the value that measures distance from the front of the vehicle to its centre of gravity. Cross track error (CTE) is used by the MPC solver and updated at every time.
+
+The fine tuning of the MPC solver parameters is a critical phase of the Controller and requires experimentation with different weight values and time steps ahead. This was pretty much a trial and error approach that took significant time until the weights were at their optimal values. One potential future experiment that I would like to try is the use of genetic algorithms that could search and find the optimal weights for the Controller.
+
+The time steps ahead and dt parameters were set to handle the latency of 100ms. Latency is used in the model in order to simulate the actual delays that would occur in a real world scneario. For dt smaller values were tried but the car had problems responding especially in curves. Eventually I set the dt value to 0.1s in order to handle the same latency. For time steps ahead I started from 25 and started dropping the value until I found sufficient enough steps to predict further in the future. In terms of the Controller the waypoints given had to be transformed to the vehicle coordinate space. The cross track error and orientation error were calculated using a polynomial fitting function. 
+
+Higher speeds have been tried but the car is not as effective as with the speed currently used. 
+
+A video of the simulation can be seen [here][video1].
 
 ## Dependencies
 
