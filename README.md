@@ -2,6 +2,7 @@
 Self-Driving Car Engineer Nanodegree Program
 
 [video1]: ./car_simulation.mov
+
 ---
 
 ## Model and MPC Solver Parameters 
