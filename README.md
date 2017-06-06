@@ -10,8 +10,11 @@ Self-Driving Car Engineer Nanodegree Program
 The Kinematic model used in this simulation does not take into account tire forces or gravity. The vehicle's state vector is defined by the position [x,y], the orientation [_ψ_] and the velocity [v] of the vehicle. Steering angle and throttle are enabled by the actuators available to our simulated vehicle where throttle is in the range of [-1, 1] and steering angle [-25, 25]. Our model can predict the state on the next time step using the current state and actuators and the following formulas:
 
 x_t+1 = x_t + v_t * cos(_ψ_t) * dt
+
 y_t+1 = y_t + v_t * sin(_ψ_t) * dt
+
 _ψ_t+1 = _ψ_t + v_t/Lf * d * dt
+
 v_t+1 = v_t + a_t * dt
 
 Lf is the value that measures distance from the front of the vehicle to its centre of gravity. Cross track error (CTE) is used by the MPC solver and updated at every time.
