@@ -238,11 +238,11 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   ok &= solution.status == CppAD::ipopt::solve_result<Dvector>::success;
   auto cost = solution.obj_value;
 
-  mpc_x.clear();
-  mpc_y.clear();
-  for (int i = 0; i < N - 1; i++) {
-      mpc_x.push_back(solution.x[x_start + i + 1]);
-      mpc_y.push_back(solution.x[y_start + i + 1]);
+  mpc_x = {};
+  mpc_y = {};
+  for (int i = 0; i < N; i++) {
+      mpc_x.push_back(solution.x[x_start + i]);
+      mpc_y.push_back(solution.x[y_start + i]);
   }
   
   return {solution.x[delta_start] + solution.x[delta_start+1],
